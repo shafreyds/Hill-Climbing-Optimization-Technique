@@ -1,0 +1,28 @@
+def hill_climbing():
+    # Step 1: Define the problem space and the evaluation function
+
+    # Step 2: Initialize the current solution
+    current_solution = generate_initial_solution()
+    best_solution = current_solution
+
+    # Step 3: Iterate until a stopping criterion is met
+    while not stopping_criterion():
+        neighbors = generate_neighbors(current_solution)
+
+        # Step 3a: Generate neighboring solutions
+        # Step 3b: Evaluate the neighboring solutions
+        evaluations = [evaluate_solution(neighbor) for neighbor in neighbors]
+
+        # Step 3c: Select the best neighboring solution
+        best_neighbor = neighbors[argmax(evaluations)]
+        if evaluate_solution(best_neighbor) > evaluate_solution(current_solution):
+            current_solution = best_neighbor
+
+            # Step 3d: Update the best solution
+            if evaluate_solution(best_neighbor) > evaluate_solution(best_solution):
+                best_solution = best_neighbor
+        else:
+            break
+
+    # Step 4: Return the best solution found
+    return best_solution
